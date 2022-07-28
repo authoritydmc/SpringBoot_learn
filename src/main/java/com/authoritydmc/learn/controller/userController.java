@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
 @Controller
+@ApiIgnore
 @RequestMapping("/users")
 public class userController {
 
