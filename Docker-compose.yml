@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=learners
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=root
+    ports:
+      - 3307:3306
+
+  app:
+    image: learnboot:latest
+    ports:
+      - 8090-9000:8080
+    environment:
+      MYSQL_HOST: mysqldb
+
+    depends_on:
+      - mysqldb
