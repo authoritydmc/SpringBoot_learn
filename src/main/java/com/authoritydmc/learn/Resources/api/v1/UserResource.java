@@ -55,4 +55,15 @@ public class UserResource {
     {
         return ResponseEntity.ok(userService.insertUser(user));
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update User",description = "Update a User in DB ",tags = UsersResourceTag)
+    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user)
+    {
+        User userFound=userService.updateuser(user,id);
+        if (userFound==null)
+            return ResponseEntity.notFound().build();
+
+        return  ResponseEntity.ok(userFound);
+    }
 }
