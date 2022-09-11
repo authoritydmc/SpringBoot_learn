@@ -52,9 +52,14 @@ public class UserResource {
     @PostMapping("")
     @Operation(summary = "Add User",description = "Add a User in DB ",tags = UsersResourceTag)
 
-    public ResponseEntity<User> addUser(@RequestBody User user)
+    public ResponseEntity<Object> addUser(@RequestBody User user)
     {
-        return ResponseEntity.ok(userService.insertUser(user));
+
+        if (userService.insertUser(user)!=null)
+        return ResponseEntity.status(201).body(user);
+        else
+          return   ResponseEntity.status(424).body("Can not create User as User with Such Id already Exist");
+
     }
 
     @PutMapping("/{id}")

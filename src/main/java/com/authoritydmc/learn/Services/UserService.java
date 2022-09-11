@@ -26,6 +26,9 @@ public class UserService {
 
     public User insertUser(User user)
     {
+        if(user.getId()!=null)
+        if (userRepository.existsById(user.getId()))
+            return null;
         userRepository.save(user);
         return user;
     }
