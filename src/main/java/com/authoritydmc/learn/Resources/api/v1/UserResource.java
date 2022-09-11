@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.authoritydmc.learn.configs.TAGS.UsersResourceTag;
 
@@ -58,12 +59,24 @@ public class UserResource {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update User",description = "Update a User in DB ",tags = UsersResourceTag)
-    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user)
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @RequestBody User user)
     {
         User userFound=userService.updateuser(user,id);
         if (userFound==null)
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(404).body("User does not Exist");
+
 
         return  ResponseEntity.ok(userFound);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Update User",description = "Update a User in DB ",tags = UsersResourceTag)
+    public ResponseEntity<String> deleteUser(@PathVariable Long id)
+    {
+        boolean opsStatus=userService.deleteUser(id);
+        if (opsStatus==false)
+return ResponseEntity.status(404).body("User does not Exist");
+        return  ResponseEntity.ok("Successfully deleted the User");
     }
 }
