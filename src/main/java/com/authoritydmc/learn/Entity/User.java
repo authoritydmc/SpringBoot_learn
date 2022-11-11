@@ -1,6 +1,7 @@
 package com.authoritydmc.learn.Entity;
 
 
+import com.authoritydmc.learn.annotations.AgeChecker;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class User {
     @ApiModelProperty(notes = "Email of user",required = true)
     String email;
     String imgUrl;
+    @AgeChecker(age=21)
+    Integer age;
     String phoneNumber;
 
     Date reg_date;
